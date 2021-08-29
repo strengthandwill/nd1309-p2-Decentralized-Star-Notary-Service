@@ -23,17 +23,17 @@
 * Token Address: [0x9794E7fb6Cdd5884fd6744ECD4c58A875e2F3364](https://rinkeby.etherscan.io/address/0x9794e7fb6cdd5884fd6744ecd4c58a875e2f3364)
 
 # Screenshots
-1. Tests:
+##### Tests:
 ![](/images/screenshot1-tests.png)
 
-2. Create a Star:
+##### Create a Star:
 ![](/images/screenshot2-create-a-star.png)
 
-3. Metamask:
+##### Metamask:
 ![](/images/screenshot3-metamask.png)
 
-4. Star created:
+##### Star created:
 ![](/images/screenshot4-star-created.png)
 
-5. Look up a star
+##### Look up a star
 ![](/images/screenshot5-look-up-a-star.png)
