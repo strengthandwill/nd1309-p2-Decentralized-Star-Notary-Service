@@ -107,10 +107,7 @@ describe('lets 2 users exchange stars', () => {
         assert.equal(await instance.ownerOf.call(star2Id), user1);
     });
 
-    it('sender not the owner of the tokens', async() => {
-        // 1. create 2 Stars with different tokenId
-        // 2. Call the exchangeStars functions implemented in the Smart Contract
-        // 3. Verify that the owners changed
+    it('sender not the owner of the tokens', async() => {        
         let instance = await StarNotary.deployed();
         let user1 = accounts[1];
         let user2 = accounts[2];
@@ -125,17 +122,45 @@ describe('lets 2 users exchange stars', () => {
         try {
             await instance.exchangeStars(star1Id, star2Id, {from: accounts[0]});                        
         } catch (error) {
-            assert.equal(error.reason, 'You have to own at least one of the tokens');
+            assert.equal(error.reason, "You have to own at least one of the tokens");
         }
     });
 });
 
+describe('lets a user transfer a star', () => {
+    it('sender is the owner', async() => {
+        // 1. create a Star with different tokenId
+        // 2. use the transferStar function implemented in the Smart Contract
+        // 3. Verify the star owner changed.
+        let instance = await StarNotary.deployed();
+        let user1 = accounts[1];
+        let user2 = accounts[2];
+        let starId = 11; 
+    
+        await instance.createStar('foo', 'BAR', starId, {from: user1});
+        assert.equal(await instance.ownerOf.call(starId), user1);        
+    
+        await instance.transferStar(user2, starId, {from: user1});
+        assert.equal(await instance.ownerOf.call(starId), user2);         
+    });
 
-it('lets a user transfer a star', async() => {
-    // 1. create a Star with different tokenId
-    // 2. use the transferStar function implemented in the Smart Contract
-    // 3. Verify the star owner changed.
+    it('sender is not the owner', async() => {
+        let instance = await StarNotary.deployed();
+        let user1 = accounts[1];
+        let user2 = accounts[2];
+        let starId = 12; 
+    
+        await instance.createStar('foo', 'BAR', starId, {from: user1});
+        assert.equal(await instance.ownerOf.call(starId), user1); 
+
+        try {
+            await instance.transferStar(user2, starId, {from: accounts[0]});                        
+        } catch (error) {
+            assert.equal(error.reason, "You can't transfer the Star you don't owned");
+        }
+    });
 });
+
 
 it('lookUptokenIdToStarInfo test', async() => {
     // 1. create a Star with different tokenId
