@@ -27,9 +27,9 @@
     ![](/images/screenshot1-tests.png)
 2. Create a Star:
     ![](/images/screenshot2-create-a-star.png)
-4. Metamask:
+3. Metamask:
     ![](/images/screenshot3-metamask.png)
-5. Star created:
+4. Star created:
      ![](/images/screenshot4-star-created.png)
-6. Look up a star
+5. Look up a star
     ![](/images/screenshot5-look-up-a-star.png)
