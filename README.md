@@ -24,12 +24,16 @@
 
 # Screenshots
 1. Tests:
-    ![](/images/screenshot1-tests.png)
+![](/images/screenshot1-tests.png)
+
 2. Create a Star:
-    ![](/images/screenshot2-create-a-star.png)
+![](/images/screenshot2-create-a-star.png)
+
 3. Metamask:
-    ![](/images/screenshot3-metamask.png)
+![](/images/screenshot3-metamask.png)
+
 4. Star created:
-     ![](/images/screenshot4-star-created.png)
+![](/images/screenshot4-star-created.png)
+
 5. Look up a star
-    ![](/images/screenshot5-look-up-a-star.png)
+![](/images/screenshot5-look-up-a-star.png)
