@@ -42,7 +42,7 @@ contract StarNotary is ERC721 {
         return address(uint160(x));
     }
 
-    function buyStar(uint256 _tokenId) public  payable {
+    function buyStar(uint256 _tokenId) public payable {
         require(starsForSale[_tokenId] > 0, "The Star should be up for sale");
         uint256 starCost = starsForSale[_tokenId];
         address ownerAddress = ownerOf(_tokenId);
@@ -58,6 +58,7 @@ contract StarNotary is ERC721 {
     // Implement Task 1 lookUptokenIdToStarInfo
     function lookUptokenIdToStarInfo (uint _tokenId) public view returns (string memory) {
         //1. You should return the Star saved in tokenIdToStarInfo mapping
+        return tokenIdToStarInfo[_tokenId].name;
     }
 
     // Implement Task 1 Exchange Stars function

@@ -12,7 +12,7 @@ it('can Create a Star', async() => {
     let tokenId = 1;
     let instance = await StarNotary.deployed();
     await instance.createStar('Awesome Star!', 'BAR', tokenId, {from: accounts[0]});
-    assert.equal((await instance.tokenIdToStarInfo.call(tokenId)).name, 'Awesome Star!');
+    assert.equal(await instance.lookUptokenIdToStarInfo.call(tokenId), 'Awesome Star!');
 });
 
 it('lets user1 put up their star for sale', async() => {
@@ -102,4 +102,8 @@ it('lookUptokenIdToStarInfo test', async() => {
     // 1. create a Star with different tokenId
     // 2. Call your method lookUptokenIdToStarInfo
     // 3. Verify if you Star name is the same
+    let instance = await StarNotary.deployed();
+    let tokenId = 9;    
+    await instance.createStar('foo', 'BAR', tokenId, {from: accounts[0]});
+    assert.equal(await instance.lookUptokenIdToStarInfo(tokenId), 'foo');
 });
