@@ -20,7 +20,7 @@
 | 11          | Eridanus    | ERI         |
 
 # Your “Token Address” on the Rinkeby Network
-* Token Address: 0x9794E7fb6Cdd5884fd6744ECD4c58A875e2F3364
+* Token Address: [0x9794E7fb6Cdd5884fd6744ECD4c58A875e2F3364](https://rinkeby.etherscan.io/address/0x9794e7fb6cdd5884fd6744ecd4c58a875e2f3364)
 
 # Screenshots
 1. Tests:
