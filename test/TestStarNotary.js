@@ -86,11 +86,50 @@ it('can add the star name and star symbol properly', async() => {
     assert.equal(result.symbol, 'BAR');
 });
 
-it('lets 2 users exchange stars', async() => {
-    // 1. create 2 Stars with different tokenId
-    // 2. Call the exchangeStars functions implemented in the Smart Contract
-    // 3. Verify that the owners changed
+describe('lets 2 users exchange stars', () => {
+    it('sender is the owner of at least one of the tokens', async() => {
+        // 1. create 2 Stars with different tokenId
+        // 2. Call the exchangeStars functions implemented in the Smart Contract
+        // 3. Verify that the owners changed
+        let instance = await StarNotary.deployed();
+        let user1 = accounts[1];
+        let user2 = accounts[2];
+        let star1Id = 7;    
+        let star2Id = 8;
+    
+        await instance.createStar('foo', 'BAR', star1Id, {from: user1});
+        await instance.createStar('foz', 'BAZ', star2Id, {from: user2});
+        assert.equal(await instance.ownerOf.call(star1Id), user1);
+        assert.equal(await instance.ownerOf.call(star2Id), user2);
+    
+        await instance.exchangeStars(star1Id, star2Id, {from: user1});
+        assert.equal(await instance.ownerOf.call(star1Id), user2);
+        assert.equal(await instance.ownerOf.call(star2Id), user1);
+    });
+
+    it('sender not the owner of the tokens', async() => {
+        // 1. create 2 Stars with different tokenId
+        // 2. Call the exchangeStars functions implemented in the Smart Contract
+        // 3. Verify that the owners changed
+        let instance = await StarNotary.deployed();
+        let user1 = accounts[1];
+        let user2 = accounts[2];
+        let star1Id = 9;    
+        let star2Id = 10;
+    
+        await instance.createStar('foo', 'BAR', star1Id, {from: user1});
+        await instance.createStar('foz', 'BAZ', star2Id, {from: user2});
+        assert.equal(await instance.ownerOf.call(star1Id), user1);
+        assert.equal(await instance.ownerOf.call(star2Id), user2);
+    
+        try {
+            await instance.exchangeStars(star1Id, star2Id, {from: accounts[0]});                        
+        } catch (error) {
+            assert.equal(error.reason, 'You have to own at least one of the tokens');
+        }
+    });
 });
+
 
 it('lets a user transfer a star', async() => {
     // 1. create a Star with different tokenId
@@ -103,7 +142,7 @@ it('lookUptokenIdToStarInfo test', async() => {
     // 2. Call your method lookUptokenIdToStarInfo
     // 3. Verify if you Star name is the same
     let instance = await StarNotary.deployed();
-    let tokenId = 9;    
+    let tokenId = 999;    
     await instance.createStar('foo', 'BAR', tokenId, {from: accounts[0]});
     assert.equal(await instance.lookUptokenIdToStarInfo(tokenId), 'foo');
 });
