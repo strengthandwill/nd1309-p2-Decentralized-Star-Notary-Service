@@ -161,13 +161,19 @@ describe('lets a user transfer a star', () => {
     });
 });
 
+describe('lookUptokenIdToStarInfo test', () => {
+    it('star exists', async() => {
+        // 1. create a Star with different tokenId
+        // 2. Call your method lookUptokenIdToStarInfo
+        // 3. Verify if you Star name is the same
+        let instance = await StarNotary.deployed();
+        let tokenId = 13;    
+        await instance.createStar('foo', 'BAR', tokenId, {from: accounts[0]});
+        assert.equal(await instance.lookUptokenIdToStarInfo(tokenId), 'foo');
+    });
 
-it('lookUptokenIdToStarInfo test', async() => {
-    // 1. create a Star with different tokenId
-    // 2. Call your method lookUptokenIdToStarInfo
-    // 3. Verify if you Star name is the same
-    let instance = await StarNotary.deployed();
-    let tokenId = 999;    
-    await instance.createStar('foo', 'BAR', tokenId, {from: accounts[0]});
-    assert.equal(await instance.lookUptokenIdToStarInfo(tokenId), 'foo');
+    it('star does not exists', async() => {
+        let instance = await StarNotary.deployed();        
+        assert.equal(await instance.lookUptokenIdToStarInfo(999), '');
+    });
 });
