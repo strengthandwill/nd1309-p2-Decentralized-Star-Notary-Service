@@ -1,4 +1,4 @@
-# Build CryptoStar Dapp on Ethereum
+# Udacity Build CryptoStar Dapp on Ethereum
 
 ## Specify the Truffle version and OpenZeppelin version used in the project.
 * Truffle version: v5.4.6
